@@ -16,3 +16,9 @@ class CarreraRepository:
             duracion=duracion 
         )
         return carrera
+    
+
+
+
+
+

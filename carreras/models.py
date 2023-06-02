@@ -45,6 +45,7 @@ class Materia(models.Model):
         Carrera,
         verbose_name= 'Carrera',
         on_delete=models.CASCADE,
+        related_name='materias'
     )
     duracion = EnumChoiceField(
         DuracionMateria,
