@@ -12,20 +12,20 @@ class Carrera(models.Model):
         (3, "TRES"),
     )
     nombre = models.CharField(
-        verbose_name='Carrera',
-        max_length=100,
+        verbose_name = 'Carrera',
+        max_length = 100,
     )
     duracion = models.IntegerField(
-        verbose_name="Duracion",
-        choices=DURACION,
+        verbose_name = "Duracion",
+        choices = DURACION,
     )
     created_at = models.DateTimeField(
-        verbose_name='Creado el',
-        auto_now=True,
+        verbose_name = 'Creado el',
+        auto_now = True,
         )
     update_at = models.DateTimeField(
-        verbose_name='Actualizado el',
-        auto_now_add=True,
+        verbose_name = 'Actualizado el',
+        auto_now_add = True,
         )
     
     class Meta:
@@ -35,21 +35,25 @@ class Carrera(models.Model):
     def __str__(self) -> str:
         return self.nombre
     
+    @property
+    def institucion(self):
+        return 'Itec'
+    
 
 class Materia(models.Model):
     nombre = models.CharField(
-        verbose_name='Materia',
-        max_length=100,
+        verbose_name = 'Materia',
+        max_length = 100,
     )
     carrera = models.ForeignKey(
         Carrera,
-        verbose_name= 'Carrera',
-        on_delete=models.CASCADE,
-        related_name='materias'
+        verbose_name = 'Carrera',
+        on_delete = models.CASCADE,
+        related_name ='materias'
     )
     duracion = EnumChoiceField(
         DuracionMateria,
-        default=DuracionMateria.SEMESTRAL
+        default = DuracionMateria.SEMESTRAL
     )
 
     def __str__(self) -> str:

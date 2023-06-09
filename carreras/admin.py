@@ -6,10 +6,13 @@ from .models import Carrera, Materia
 class CarreraAdmin(admin.ModelAdmin):
     model = Carrera
     list_display = ('nombre', 'duracion', 'institucion')
+    list_editable = ('duracion',)
+    list_display_links = ('nombre',)
+    list_filter = ('duracion',)
+    list_per_page = 3
+    search_fields = ('nombre', 'duracion',)
+    readonly_fields = ('nombre',)
 
-    def institucion(self, obj:Carrera):
-        return "Itec"
-    
 
 class MateriaAdmin(admin.ModelAdmin):
     model = Materia
