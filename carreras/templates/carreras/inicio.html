@@ -1,0 +1,9 @@
+{% extends 'carreras/layout.html' %}
+{% block title%} INICIO SITEC {% endblock %}
+
+{% block body%}
+<h4>El Itec Brinda los siguientes niveles de educacion</h4>
+{% for nivel in niveles %}
+    <li>{{nivel}}</li>
+{% endfor %}
+{% endblock %}

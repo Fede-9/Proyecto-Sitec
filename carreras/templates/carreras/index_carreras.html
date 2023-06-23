@@ -1,72 +1,83 @@
 {% extends 'carreras/layout.html' %}
 
 {% block title %}
-   Carreras
+Carreras
 {% endblock %}
 
 {% block body %}
-        <h1 class="display-3"> Bienvenido a la pantalla de Carreras </h1>
-        <div class="row">
-            <div class="col-6">
-                <h3>Carreras</h5>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Carrea</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for carrera in carreras %}
-                            <tr>
-                                <td>{{carrera.nombre}}</td>
-                                <td>
-                                    <a href="#{{carrera}}" class="btn btn-info">Ver</a>
-                                    <a href="#" class="btn btn-danger">Eliminar</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-            </div>
-            <div class="col-6">
-                <h3>Formulario de Creacion de Carrera</h3>
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    {{form}}       
-                    <button type="submit" class="btn btn-primary mt-2">Agregar</button>
-                </form>
-                {% if ok %}
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading"></h4>
-                        <p>La carrera se creo correctamente</p>
-                        <p class="mb-0"></p>
-                    </div>
-                 {% endif %}
+<h4>Niveles de Estudios que Brinda el Itec</h4>
+{{niveles}}
 
-                <!-- <form action="" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group w-25">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" placeholder="Nombre de la Carrera" required>
-                    </div>
-                    <div class="form-group w-25">
-                        <label for="duracion">Duracion</label>
-                        <input type="number" min="0" max="3" name="duracion" id="duracion" placeholder="Duracion de la Carrera">
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-2">Agregar</button>
-                </form>
-                {% if ok %}
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading"></h4>
-                        <p>La carrera se creo correctamente</p>
-                        <p class="mb-0"></p>
-                    </div>
-                {% endif %} -->
+
+<h1 class="display-3"> Bienvenido a la pantalla de Carreras </h1>
+<div class="row">
+    <div class="col-6">
+        <h3>Carreras</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Carrera</th>
+                       <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for carrera in page_obj %}
+                    <tr>
+                        <td>{{carrera.nombre}}</td>
+                        <td>
+                            <a href="#{{carrera.id}}" class="btn btn-info">Ver</a>
+                            <div class="btn btn-danger">Eliminar</div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?pagina=1" class="btn btn-info">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i> Primera</a>
+                        <a href="?pagina={{ page_obj.previous_page_number }}" class="btn btn-info">Anterior</a>
+                    {% endif %}
+            
+                    <span class="current" class="btn btn-info">
+                        Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                        <a href="?pagina={{ page_obj.next_page_number }}" class="btn btn-info">Siguiente</a>
+                        <a href="?pagina={{ page_obj.paginator.num_pages }}" class="btn btn-info">Ultima &raquo;</a>
+                    {% endif %}
+                </span>
             </div>
+    </div>
+    <div class="col-6">
+        <h3>Formulario de Creacion de Carrera</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit" class="btn btn-primary mt-2">Agregar</button>
+        </form>
+        {% if ok %}
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading"></h4>
+            <p>La carrera se creo correctamente</p>
+            <p class="mb-0"></p>
         </div>
+        {% endif %}
+        <!-- <form action="" method="POST">
+                <div class="form-group w-25">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" placeholder="Ingrese aqui el nombre de la carrera" required="True">
+                </div>
+                <div class="form-group w-25">
+                    <label for="duracion">Duracion</label>
+                    <input type="number" min="0" max="3" name="duracion" placeholder="Ingrese aqui la duracion la carrera">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Agregar</button>
+            </form>
+ -->
+    </div>
+</div>
 
 {% endblock %}
-
-
-       
